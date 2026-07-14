@@ -13,7 +13,7 @@ call .venv\Scripts\activate
 @REM pytest -s -v  --html=Reports/smoke_chrome.html Test_cases -n=2  -m "smoke" --browser=chrome
 
 @REM edge 
-pytest -s -v  --html=Reports/regression_edge.html Test_cases -n=2 -m regression  --browser=edge
+pytest -s -v  --html=Reports/regression_edge.html Test_cases  -m regression  --browser=edge
 @REM pytest -s -v  --html=Reports/smoke_edge.html Test_cases -n=2  -m "smoke" --browser=edge
 echo.
 echo ====================================
