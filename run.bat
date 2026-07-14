@@ -1,9 +1,10 @@
 @echo off
 
-cd /d %WORKSPACE%
+cd /d E:\Akshay\2026_Job_Document\My_Automation_Project
 
-python -m pip install --upgrade pip
+call .venv\Scripts\activate
 
-python -m pip install -r requirements.txt
-
-python -m pytest -v -s Test_cases -m regression --browser=edge --html=Reports\report.html --self-contained-html
+python -m pytest -v -s Test_cases ^
+-m regression ^
+--browser=edge ^
+--html=Reports\report.html
