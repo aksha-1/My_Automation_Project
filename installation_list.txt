@@ -1,0 +1,15 @@
+installation list 
+python -3.13 
+selenium  - 4.5 
+pytest  -9.1 
+request  -2.34
+Python , pytest ,selenium ,page object Model , HTML report 
+installation :
+1) Python 
+2) Pytest  - pip install pytest
+3) Selnium  - pip install selenium 
+4) Pytest-xdict  -pip install pytest-xdist
+5) pytest -html  -pip install pytest-html
+6) read from excle - pip install openpyxl
+6) Allure report 
+9) pytest dependency : pip install pytest-dependency
