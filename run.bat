@@ -8,3 +8,4 @@ python -m pytest -v -s Test_cases ^
 -m regression ^
 --browser=edge ^
 --html=Reports\report.html
+exit /b 0
