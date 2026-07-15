@@ -11,5 +11,5 @@ installation :
 4) Pytest-xdict  -pip install pytest-xdist
 5) pytest -html  -pip install pytest-html
 6) read from excle - pip install openpyxl
-6) Allure report 
+6) Allure report  pip install allure-pytest
 9) pytest dependency : pip install pytest-dependency

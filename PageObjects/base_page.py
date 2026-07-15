@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from utilities.custome_logger import LogGen
 import os 
 import time
 import datetime
@@ -12,15 +13,17 @@ waiting for elements, and handling alerts.
  # Wrapper for locating an element safely
 class BasePage:
     screen_save_file ="Screenshots"
+    log=LogGen.log_gen()
 
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
+        
 
     def save_screenshot(self, screen_name):
 
         os.makedirs(self.screen_save_file, exist_ok=True)
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         file_path = os.path.join(
             self.screen_save_file,
             f"{screen_name}_{timestamp}.png")

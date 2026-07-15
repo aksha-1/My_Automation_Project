@@ -1,6 +1,15 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+"""
+1) CustomWait → waiting and synchronization.
+2) Return the element when it is ready
+advatange :
+1) avoide code duplicate 
+2) reduce flaky test 
+3) easy to maintain and understand 
+4) 
+"""
 
 class CustomWait:
 
@@ -37,3 +46,23 @@ class CustomWait:
         return self.wait.until(
             EC.url_contains(url)
         )
+    
+"""
+wait_for_visibility()
+
+wait_for_clickable()
+
+wait_for_presence()
+
+wait_for_invisibility()
+
+wait_for_alert()
+
+wait_for_title()
+
+wait_for_url()
+
+wait_for_frame()
+
+wait_for_window_count()
+"""
