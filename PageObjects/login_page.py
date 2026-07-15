@@ -1,13 +1,16 @@
 import selenium 
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-class LoginPage:
+from PageObjects.base_page import BasePage
+class LoginPage(BasePage):
+
     textbox_username_xpath ='//input[contains(@class,"oxd-input")]' #or //input[@name="username"]'#'//input[@name="username"]'
     textbox_password_xpath ='//input[@name="password"]'
     button_login_xpath='//button[@type="submit"]'
     button_logout_linktext='Logout'
     click_logoout_drop_down_xpath='//span[@class="oxd-userdropdown-tab"]//img'
     message_invalid_xpath='//p[text()="Invalid credentials"]'
+
     def __init__(self,driver):
         self.driver=driver
     def set_username(self,username):

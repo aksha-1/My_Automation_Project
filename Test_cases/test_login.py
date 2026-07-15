@@ -5,7 +5,7 @@ from utilities.readProperties import ReadConfig
 from utilities.custome_logger import LogGen
 
 import time
-class Test_001_login:
+class Test_001_login():
     base_url=ReadConfig.get_application_url()
     username=ReadConfig.get_username()
     password =ReadConfig.get_password()
@@ -13,18 +13,20 @@ class Test_001_login:
 
     @pytest.mark.smoke
     @pytest.mark.dependency()
-    def test_homepage_title(self,setup):
+    def test_homepage_title(self,setup,request):
         self.log.info("************ Test_001_login *********************")
         self.log.info("************ verify homepage_title *********************")
         self.driver=setup
-        self.driver.get(self.base_url)
+        self.log_page = LoginPage(self.driver)
+        test_name = request.node.name
+        self.log_page.open_url(self.base_url)
         a=self.driver.title
         if a=="OrangeHR":
             assert True
             self.log.info("************ Home page title test is passed *********************")
         else:
             self.log.error("************ Home page titile test is failed *********************")
-            self.driver.save_screenshot(f"./Screenshorts/test_homepage_title.png")
+            self.log_page.save_screenshort(test_name)
             assert False 
 
 

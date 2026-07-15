@@ -1,0 +1,4 @@
+15-Jul-26 18:14:41 | INFO | test_end_end.py | test_homepage_title1| Line:40 | ************ Test_001_login *********************
+15-Jul-26 18:14:41 | INFO | test_end_end.py | test_homepage_title1| Line:41 | ************ verify homepage_title *********************
+15-Jul-26 18:14:44 | ERROR | test_end_end.py | test_homepage_title1| Line:51 | ************ Home page titile test is failed *********************
+15-Jul-26 18:14:47 | INFO | conftest.py | setup| Line:20 | *******closed the  browser ************* 
