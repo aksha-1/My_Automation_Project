@@ -49,7 +49,7 @@ class Test_login_e_to_e:
             self.log.info("************ Home page title test is passed *********************")
         else:
             self.log.error("************ Home page titile test is failed *********************")
-            self.pg.save_screenshort(test_name)
+            self.pg.save_screenshot(test_name)
             assert False 
 
 

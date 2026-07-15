@@ -26,7 +26,7 @@ class Test_001_login():
             self.log.info("************ Home page title test is passed *********************")
         else:
             self.log.error("************ Home page titile test is failed *********************")
-            self.log_page.save_screenshort(test_name)
+            self.log_page.save_screenshot(test_name)
             assert False 
 
 
