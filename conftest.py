@@ -3,6 +3,7 @@ from selenium import webdriver
 from pytest_metadata.plugin import metadata_key
 from  utilities.custome_logger import LogGen
 log=LogGen.log_gen()
+
 @pytest.fixture()
 def setup(browser):
     if browser=="chrome":
@@ -12,7 +13,7 @@ def setup(browser):
          driver=webdriver.Edge()
          log.info("************ Launching the edge  browser ******************")
     else:
-        driver = webdriver.Chrome()
+        raise Exception ("Please provide the browser name e.g. ---browser= 'browser name'")
          
     driver.maximize_window()  
     yield driver
