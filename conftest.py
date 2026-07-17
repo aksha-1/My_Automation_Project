@@ -42,3 +42,26 @@ def pytest_configure(config):
 def pytest_metadata(metadata):
     metadata.pop("JAVA_HOME", None)
     metadata.pop("PLUNGINS", None)
+
+
+#Database connection 
+import pytest
+import mysql.connector
+
+@pytest.fixture(scope="session")
+def db_connection():
+
+    print("Connecting to Database...")
+
+    connection = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="password",
+        database="testdb"
+    )
+
+    yield connection
+
+    print("Closing Database Connection...")
+
+    connection.close()

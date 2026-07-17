@@ -34,24 +34,17 @@ class BasePage:
 
     # Wrapper for locating an element safely
     def click(self, locator):
-        self.wait.until(
-            EC.element_to_be_clickable(locator)
-        ).click()
+        self.wait.until(EC.element_to_be_clickable(locator)).click()
+
     # Wrapper for locating an element safely
     def type(self, locator, text):
-        self.wait.until(
-            EC.visibility_of_element_located(locator)
-        ).send_keys(text)
+        self.wait.until( EC.visibility_of_element_located(locator) ).send_keys(text)
 
     def get_text(self, locator):
-        return self.wait.until(
-            EC.visibility_of_element_located(locator)
-        ).text
+        return self.wait.until( EC.visibility_of_element_located(locator)).text
 
     def is_visible(self, locator):
-        return self.wait.until(
-            EC.visibility_of_element_located(locator)
-        ).is_displayed()
+        return self.wait.until(EC.visibility_of_element_located(locator)).is_displayed()
 
     def open_url(self, url):
         self.driver.get(url)
