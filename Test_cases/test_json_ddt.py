@@ -6,18 +6,18 @@ from utilities.custome_logger import LogGen
 from utilities.exce_utility import  DDT
 import time
 class Testddtjson():
-    base_url=ReadConfig.get_application_url()
+    #base_url=ReadConfig.get_application_url()
     log=LogGen.log_gen()
     @pytest.mark.parametrize("username,password,expected",DDT.read_json_data())
-    def test_login_json_ddt(self,setup,username,password,expected):
+    def test_login_json_ddt(self,setup,config_data,username,password,expected):
         self.log.info("************ verify test_login_homepage DDT json  *********************")
         self.driver = setup
-        self.driver.get(self.base_url)
-        self.log_page = LoginPage(self.driver)
+        self.driver.get(config_data["base_url"])
+        log_page = LoginPage(self.driver)
         time.sleep(2)
-        self.log_page.set_username(username)
-        self.log_page.set_password(password)
-        self.log_page.click_login()
+        log_page.set_username(username)
+        log_page.set_password(password)
+        log_page.click_login()
 
         time.sleep(2)
         url=self.driver.current_url  

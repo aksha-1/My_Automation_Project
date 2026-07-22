@@ -3,9 +3,13 @@ config=configparser.RawConfigParser()
 config.read(".\\Configurations\\config.ini")
             
 class ReadConfig:
+    # @staticmethod
+    # def get_application_url():
+    #     url=config.get('common_data','base_url')
+    #     return url
     @staticmethod
-    def get_application_url():
-        url=config.get('common_data','base_url')
+    def get_application_url(env):
+        url=config.get(env,'base_url')
         return url
 
     @staticmethod

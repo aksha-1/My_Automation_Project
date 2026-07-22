@@ -22,12 +22,38 @@ def setup(browser):
 
 
 def pytest_addoption(parser): # this will get value from CLI /hook
-    parser.addoption("--browser")
+    parser.addoption(
+        "--browser",
+        action="store",
+        default="chrome",
+        help="Browser Name: chrome, edge, firefox"
+    )
+
+    parser.addoption(
+        "--env",
+        action="store",
+        default="QA",
+        help="Environment: DEV, QA, STAGING"
+    )
+
+
 
 @pytest.fixture()
 def browser(request): # This will return the browser value to set up method 
     return request.config.getoption("--browser")
 
+@pytest.fixture()
+def env(request):
+    return request.config.getoption("--env")
+
+
+@pytest.fixture(scope="function")
+def config_data(env):
+    return {
+        "base_url": ReadConfig.get_application_url(env),
+        "username": ReadConfig.get_username(),
+        "password": ReadConfig.get_password()
+    }
 ##########  Pytest HTML report ################################
 # It is hook adding Environement information into HTML report 
 # Hook to add Environment information into HTML report
