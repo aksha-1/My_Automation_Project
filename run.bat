@@ -6,6 +6,6 @@ call .venv\Scripts\activate
 
 python -m pytest -v -s Test_cases ^
 -m regression ^
---browser=edge ^
+--browser=chrome ^
 --html=Reports\report.html
 exit /b 0
