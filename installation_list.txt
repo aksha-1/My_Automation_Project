@@ -13,3 +13,5 @@ installation :
 6) read from excle - pip install openpyxl
 6) Allure report  pip install allure-pytest
 9) pytest dependency : pip install pytest-dependency
+10) pytest rerun take_screenshot
+pip install mysql-connector-python

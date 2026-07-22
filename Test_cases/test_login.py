@@ -3,7 +3,8 @@ from selenium import webdriver
 from PageObjects.login_page import LoginPage
 from utilities.readProperties import ReadConfig
 from utilities.custome_logger import LogGen
-
+import os 
+print("current working dir",os.getcwd())
 import time
 class Test_001_login():
     base_url=ReadConfig.get_application_url()
@@ -21,7 +22,7 @@ class Test_001_login():
         test_name = request.node.name
         self.log_page.open_url(self.base_url)
         a=self.driver.title
-        if a=="OrangeHR":
+        if a=="OrangeHRM":
             assert True
             self.log.info("************ Home page title test is passed *********************")
         else:

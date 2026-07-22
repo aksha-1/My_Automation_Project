@@ -45,23 +45,21 @@ def pytest_metadata(metadata):
 
 
 #Database connection 
-import pytest
-import mysql.connector
+
+from Database.db_manager import DBManager
+from utilities.readProperties import ReadConfig
+
 
 @pytest.fixture(scope="session")
-def db_connection():
+def db():
 
-    print("Connecting to Database...")
-
-    connection = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="password",
-        database="testdb"
+    database = DBManager(
+        host=ReadConfig.get_db_host(),
+        user=ReadConfig.get_db_user(),
+        password=ReadConfig.get_db_password(),
+        database=ReadConfig.get_db_name()
     )
 
-    yield connection
+    yield database
 
-    print("Closing Database Connection...")
-
-    connection.close()
+    database.close()
