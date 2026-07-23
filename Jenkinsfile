@@ -1,10 +1,34 @@
 pipeline {
 
-    agent any
+    agent {
+        label "${params.PLATFORM}"
+    }
 
     parameters {
-        choice(name: 'ENV', choices: ['DEV', 'QA', 'STAGING'], description: 'Select Environment')
-        choice(name: 'BROWSER', choices: ['chrome', 'edge'], description: 'Select Browser')
+
+        choice(
+            name: 'PLATFORM',
+            choices: ['windows', 'linux'],
+            description: 'Select Operating System'
+        )
+
+        choice(
+            name: 'ENV',
+            choices: ['DEV', 'QA', 'STAGING'],
+            description: 'Select Environment'
+        )
+
+        choice(
+            name: 'BROWSER',
+            choices: ['chrome', 'edge'],
+            description: 'Select Browser'
+        )
+
+        choice(
+            name: 'SUITE',
+            choices: ['all', 'smoke', 'regression', 'e2e'],
+            description: 'Select Test Suite'
+        )
     }
 
     stages {
@@ -17,43 +41,94 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install --upgrade pip'
-                bat 'pip install -r requirements.txt'
-                bat 'pip install mysql-connector-python'
-            }
-        }
+                script {
 
-        stage('Run Tests') {
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-                    bat """
-                    pytest Test_cases ^
-                    --browser=${params.BROWSER} ^
-                    --env=${params.ENV} ^
-                    --html=Reports/report.html ^
-                    --self-contained-html ^
-                    --junitxml=Reports/results.xml
-                    """
+                    if (isUnix()) {
+
+                        sh '''
+                        python3 -m pip install --upgrade pip
+                        pip3 install -r requirements.txt
+                        '''
+
+                    } else {
+
+                        bat '''
+                        python -m pip install --upgrade pip
+                        pip install -r requirements.txt
+                        '''
+
+                    }
 
                 }
             }
         }
 
-        stage('Publish Results') {
+        stage('Run Tests') {
+
             steps {
-                junit 'Reports/results.xml'
-                archiveArtifacts artifacts: 'Reports/*', fingerprint: true
+
+                catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
+
+                    script {
+
+                        def suiteOption = ""
+
+                        if (params.SUITE != "all") {
+                            suiteOption = "-m ${params.SUITE}"
+                        }
+
+                        if (isUnix()) {
+
+                            sh """
+                            pytest Test_cases \
+                            --browser=${params.BROWSER} \
+                            --env=${params.ENV} \
+                            ${suiteOption} \
+                            --html=Reports/report.html \
+                            --self-contained-html \
+                            --junitxml=Reports/results.xml
+                            """
+
+                        } else {
+
+                            bat """
+                            pytest Test_cases ^
+                            --browser=${params.BROWSER} ^
+                            --env=${params.ENV} ^
+                            ${suiteOption} ^
+                            --html=Reports/report.html ^
+                            --self-contained-html ^
+                            --junitxml=Reports/results.xml
+                            """
+
+                        }
+
+                    }
+                }
             }
         }
+
+        stage('Publish Results') {
+
+            steps {
+
+                junit 'Reports/results.xml'
+
+                archiveArtifacts artifacts: 'Reports/*', fingerprint: true
+
+            }
+        }
+
     }
 
     post {
+
         always {
             echo 'Pipeline execution completed.'
         }
 
         success {
-            echo 'All tests passed.'
+            echo 'All tests passed successfully.'
         }
 
         unstable {
@@ -61,7 +136,9 @@ pipeline {
         }
 
         failure {
-            echo 'Pipeline failed due to a configuration or execution error.'
+            echo 'Pipeline failed due to configuration or execution issues.'
         }
+
     }
+
 }
