@@ -1,8 +1,6 @@
 pipeline {
 
-    agent {
-        label "${params.PLATFORM}"
-    }
+    agent  any
 
     parameters {
 
