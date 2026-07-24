@@ -1,4 +1,5 @@
 import requests
+import pytest
 from API.base_api import APIClient
 from utilities.readProperties import ReadConfig
 from TestData import employee_payload_api 
@@ -6,7 +7,7 @@ from utilities.custome_logger import LogGen
 class TestAPI:
     log=LogGen.log_gen()
 
-
+    @pytest.mark.api
     def test_create_product(self):
         self.log.info("****** API - test_create_product ****************")
         base_url=ReadConfig.get_base_url_api()
