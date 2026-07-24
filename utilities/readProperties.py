@@ -1,6 +1,6 @@
 import configparser
 config=configparser.RawConfigParser()
-config.read(".\\Configurations\\config.ini")
+config.read("./Configurations/config.ini")
             
 class ReadConfig:
     # @staticmethod
@@ -41,6 +41,10 @@ class ReadConfig:
     def get_host():
         database = config.get("database", "database")
         return database 
+    @staticmethod
+    def get_base_url_api(): # get the base url 
+        base_url_api=config.get("API","base_url_api")
+        return base_url_api
     
 
 

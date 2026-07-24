@@ -13,3 +13,9 @@ installation :
 6) read from excle - pip install openpyxl
 6) Allure report 
 9) pytest dependency : pip install pytest-dependency
+#----------------------------------------------------------
+TestCases/UI/ → Contains UI automation test scripts (Selenium/Playwright).
+TestCases/API/ → Contains API test cases.
+API/ → Contains reusable API client classes and endpoint methods.
+Pages/ → Contains Page Object Model classes (only for UI tests).
+Utilities/ → Shared helpers such as logging, database utilities, configuration, and common functions
